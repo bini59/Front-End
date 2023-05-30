@@ -5,7 +5,7 @@ import "./style/List.css"
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-const MemoList = ({ list }) => {
+const MemoList = ({ list, onDelete }) => {
 
     const location = useLocation();
     useEffect(() => {
@@ -23,7 +23,7 @@ const MemoList = ({ list }) => {
             <h4>{list.length}개의 메모가 저장되었습니다.</h4>
             
             <Outlet />
-            {location.pathname == "/" ? <div className="memo-items">{list.map(item => <ListItem item={item} />)}</div> : <div></div>}
+            {location.pathname == "/" ? <div className="memo-items">{list.map(item => <ListItem key={item.id} item={item} onDelete={onDelete} />)}</div> : <div></div>}
         </div>
     )
 }

@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+const MemoEdit = ({ onCreate }) => {
+    
+    const { id } = useParams();
+    useEffect(() => {
+        if (id) {
+            console.log(id);
+            let local = localStorage.getItem("MemoList");
+            let localData = JSON.parse(local);
+            localData.map((item) => { if (item.id == id) setState(item) })
+        }
+        else {
+            
+        }
+    }, [id])
 
-const MemoEdit = ({onCreate}) => {
     const [state, setState] = useState({
         title: '',
         content: '',
@@ -26,7 +40,7 @@ const MemoEdit = ({onCreate}) => {
             alert("운영진을 선택해주세요");
             return;
         }
-        onCreate(state.title, state.content, state.member);
+        onCreate(state.title, state.content, state.member, id);
         setState({ title: '', content: '', member: '',});
         alert("저장 성공!");
     }
