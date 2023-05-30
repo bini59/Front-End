@@ -11,7 +11,7 @@ function App() {
   const [data, setData] = useState([]);
 
   const onCreate = (title, content, member, ID) => {
-    let id = data.length == 0 ? 1 : data[data.length - 1].id + 1;
+    let id = data.length == 0 ? 1 : (data[data.length - 1].id)*1 + 1;
     const newItem = { id: id, title: title, content: content, member: member };
     setData([newItem, ...data]);
     localStorage.setItem("MemoList", JSON.stringify([newItem, ...data]));
